@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tutorial GIT</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        div {
+            margin: 60px;
+            border-radius: 10px;
+            border: 1px solid black;
+            background-color:  #abb2b9;
+            padding: 15px;
+        }
+
+        h2 {
+            color: blue;
+        }
+
+        p {
+            text-align: justify;
+            font-weight: bold;
+        }
+
+        pre {
+            border-radius: 10px;
+            border: 1px solid black;
+            background-color: #d0d3d4;
+            padding-top: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+<h2>Configurando o nome de usuário e endereço de e-mail</h2>
+<p>
+Para iniciar o uso do GIT é necessário configurar o nome de usuáario e endereço de e-mail.
+</p>
+
+<p>
+Estas informações serão necessárias para identificar o autor dos commits que serão realizados mais tarde.
+</p>
+
+<pre>
+git config --global user.name "Luciano Silagi"
+git config --global user.name "lcsilagi@gmail.com"
+</pre>
+
+<h2>Alterando o nome do branch default</h2>
+<p>
+Este não é um passo obrigatório, mas a partir da versão 2.28 do GIT podemos alterar o nome do repositório para main. 
+</p>
+
+<p>
+Por padrão, o nome do repositório é master e o recomendado é alterar para main, quando possível.
+</p>
+
+<pre>git config --global init.defaultBranch main</pre>
+
+<h2>Como verificar as configurações do GIT</h2>
+<p>Podemos utilizar os comandos abaixo para verificar as configurações do GIT:</p>
+
+<pre>git config user.name
+Luciano Silagi
+</pre>
+
+<pre>git config user.email
+luciano.silagi@added.com.br
+</pre>
+
+<pre>
+git config --list
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+core.autocrlf=true
+core.fscache=true
+core.symlinks=true
+core.editor="C:\\Program Files\\Notepad++\\notepad++.exe" -multiInst -notabbar -nosession -noPlugin
+pull.rebase=false
+credential.helper=manager-core
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=main
+user.name=Luciano Silagi
+user.email=luciano.silagi@added.com.br
+init.defaultbranch=main
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+</pre>
+
+<h2>Estrutura do diretório de trabalho</h2>
+
+<p>Neste exemplo, vou utilizar o diretório c:\html, que contêm a estrutura apresentada abaixo:</p>
+
+<pre>
+C:\html>dir
+O volume na unidade C não tem nome.
+O Número de Série do Volume é 2E9D-A973
+
+Pasta de C:\html
+
+03/11/2021  07:21    &lt;DIR&gt;         .
+03/11/2021  07:21    &lt;DIR&gt;         ..
+03/11/2021  07:21               366 index.html
+                1 arquivo(s)            366 bytes
+                2 pasta(s)   48.578.879.488 bytes disponíveis
+</pre>
+
+<h2>Conteúdo do arquivo index.html</h2>
+
+<pre>
+C:\html>type index.html
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;link rel="stylesheet" href="css/estilo01.css"&gt;
+    &lt;title&gt;Curso Javascript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;    
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;hr&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>Verificando se existe um repositório</h2>
+
+<p>Para verificar se existe um repositório GIT no diretório de trabalho:</p>
+
+<pre>
+C:\html>git status
+fatal: not a git repository (or any of the parent directories): .git
+</pre>
+
+<h2>Inicializando o repositório GIT</h2>
+
+<p>
+Um repositório GIT deve ser criado dentro do diretório de trabalho:
+</p>
+
+<pre>
+C:\html>git init
+Initialized empty Git repository in C:/html/.git/
+</pre>
+
+<h2>Verificando o status antes de adicionar arquivos na área de stage</h2>
+
+<p>
+Na saída gerada pelo comando git status abaixo podemos verficar que apesar do repositório GIT
+ter sido inicializado, ainda temos arquivos não rastreados pelo GIT (Untracked files).
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+</pre>
+
+<h2>Adicionando arquivos na área de stage</h2>
+
+<p>Podemos utilizar o comando git add para adicionar arquivos ao repositório. Vamos adicionar o arquivo index.html.    
+</p>
+
+<pre>
+git add index.html
+</pre>
+
+
+<h2>Verificando o status após adicionar arquivos na área de stage</h2>
+
+<p>
+Na saída gerada pelo comando git status abaixo podemos verificar que o GIT mostra que um existe um novo
+arquivo e nos informa o comando para remover o arquivo da área de stage.
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+    (use "git rm --cached &lt;file&gt;..." to unstage)
+        new file:   index.html
+</pre>
+
+<h2>Realizando o primeiro commit</h2>
+
+<p>
+O commit é operação que armazena o estado dos arquivos que estão na área de stage com suas modificações
+atuais. Todo commit deve conter uma mensagem descritiva que ajuda a identificar este commit.
+
+<p>
+É através dos commits que podemos rastrear as alterações nos arquivos e inclusive podemos recuperar um
+estado de arquivo através de um commit especifico.
+</p>
+
+</p>
+
+<pre>
+C:\html>git commit -m "index.html original"
+[main (root-commit) 8286a8b] index.html original
+ 1 file changed, 14 insertions(+)
+ create mode 100644 index.html
+</pre>
+
+<h2>Verificando o status do diretório de trabalho</h2>
+
+<p>
+O status mostra que o diretório de trabalho está limpo, ou seja, os arquivos armazenados no commits
+são os mesmos que estão no diretório de trabalho.
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+nothing to commit, working tree clean
+</pre>
+
+
+<h2>Verificando o histórico de commits</h2>
+<p>
+O comando git log é responsável por apresentar um histórico com informações sobre todos os commits já
+realizados até o momento atual.
+</p>
+
+</p>
+Entre as informações do commit temos, o nome e endereço de e-mail do autor, data em que o commit foi realizado,
+o hash (que é uma string que idenitifica um commit e não se repete) e a mensagem que você utilizou para identificar
+este commit.
+</p>
+
+<pre>
+C:\html>git log
+commit 8286a8b9f439092d6e7d0eda75155cde27659439 (HEAD -> main)
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 11:42:23 2021 -0300
+
+    index.html original
+</pre>
+
+<h2>Verificando o conteúdo de um commit</h2>
+
+<p>
+O comando git show mostra o conteúdo de um commit:
+</p>
+
+<pre>
+C:\html>git show
+commit 8286a8b9f439092d6e7d0eda75155cde27659439 (HEAD -> main)
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 11:42:23 2021 -0300
+
+    index.html original
+
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..d9ff627
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,14 @@
++&lt;!DOCTYPE html&gt;
++&lt;html lang="en"&gt;
++&lt;head&gt;
++    &lt;meta charset="UTF-8"&gt;
++    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
++    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
++    &lt;link rel="stylesheet" href="css/estilo01.css"&gt;
++    &lt;title&gt;Curso Javascript&lt;/title&gt;
++&lt;/head&gt;
++&lt;body&gt;
++    &lt;h1&gt;Hello World!&lt;/h1&gt;
++    &lt;hr&gt;
++&lt;/body&gt;
++&lt;/html&gt;
+\ No newline at end of file
+</pre>
+
+<h2>Realizando uma modificação no arquivo index.html</h2>
+
+<p>
+Adicionamos um paragrafo no nosso arquivo index.html.    
+</p>
+
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;link rel="stylesheet" href="css/estilo01.css"&gt;
+    &lt;title&gt;Curso Javascript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;    
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;p&gt;Eu ainda estou vivo!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>Verificando o status do diretório de trabalho após a modificação</h2>
+
+<p>
+O GIT informa que o arquivo index.html foi modificado.
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &gt;file&lt;\..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+<h2>Visualizando as modificações</h2>
+
+<p>
+O comando git diff mostra as alterações entre o do diretório de trabalho e o arquivo que está no commit.
+mais atual.
+</p>
+
+<p>
+Na saída do comando abaixo, podemos visualizar o sinal de mais no inicio da linha "Eu ainda estou vivo!"
+que indica que está linha foi adicionada ao arquivo, ou seja, a alteração que fizemos.
+</p>
+
+<pre>
+C:\html>git diff
+diff --git a/index.html b/index.html
+index d9ff627..eb187f4 100644
+--- a/index.html
++++ b/index.html
+@@ -10,5 +10,6 @@
+    &lt;body&gt;
+        &lt;h1&gt;Hello World!&lt;/h1&gt;
+        &lt;hr&gt;
++       &lt;p&gt;Eu ainda estou vivo!&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+\ No newline at end of file
+</pre>
+
+<h2>Desfazendo uma modificação indesejada</h2>
+
+<p>
+Vamos supor que fizemos várias alterações e queremos descartar estas alterações e voltar ao
+ponto anterior, mas não lembramos exatamente quais alterações temos que remover.
+</p>
+
+<p>
+Lembre-se que neste ponto ainda não adicionamos o arquivo na área de stage.
+</p>
+
+<pre>
+C:\html>git restore index.html
+</pre>
+
+<h2>Verificando se as alterações foram descartadas</h2>
+
+<p>
+Note que o comando git diff não mostra nada.  Isso significa que nosso arquivo index.html voltou
+ao ponto anterior, ou seja, antes da nossa modificação.
+</p>
+
+<pre>
+C:\html>git diff
+</pre>
+
+<p>
+Note que o comando git status informa que o diretório de trabalho está limpo, ou seja, não houve 
+modificação alguma.
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+nothing to commit, working tree clean
+</pre>
+
+<h2>Realizando uma nova modificação no arquivo index.html</h2>
+
+<p>
+Adicionamos um novo páragrafo, a linha Eu quero ouvir synthwave!
+</p>
+
+<pre>
+C:\html>git status
+On branch main
+Changes not staged for commit:
+    (use "git add &lt;file&gt;..." to update what will be committed)
+    (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+<p>
+O comando git diff mostra que foi realizada uma alteração:
+</p>
+
+<pre>
+C:\html>git diff
+diff --git a/index.html b/index.html
+index d9ff627..fae5f81 100644
+--- a/index.html
++++ b/index.html
+@@ -10,5 +10,6 @@
+    &lt;body&gt;
+        &lt;h1&gt;Hello World!&lt;/h1&gt;
+        &lt;hr&gt;
++       &lt;p&gt;Eu quero ouvir synthwave!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    \ No newline at end of file
+</pre>
+
+<h2>Vamos adicionar o arquivo na área de stage</h2>
+
+<p>
+Vamos utilizar o comando git add:
+</p>
+
+<pre>
+C:\html>git add .
+</pre>
+
+<p>E para verificar o status vamos utilizar o git status, que mostra que o arquivo foi modificado.</p>
+
+<pre>
+C:\html>git status
+On branch main
+Changes to be committed:
+    (use "git restore --staged &lt;file&gt;..." to unstage)
+        modified:   index.html
+</pre>
+
+<h2>Vamos realizar um novo commit</h2>
+
+<p>Para salvar este ponto do projeto na linha do tempo do GIT, vamos fazer um novo commit:</p>
+
+<pre>
+C:\html>git status
+On branch main
+Changes to be committed:
+    (use "git restore --staged &lt;file&gt;..." to unstage)
+        modified:   index.html
+
+
+C:\html>git commit -m "Incluindo novo paragrafo synthwave"
+[main 1025f97] Incluindo novo paragrafo synthwave
+    1 file changed, 1 insertion(+)
+</pre>
+
+
+<h2>Verificando o status</h2>
+<pre>
+C:\html>git status
+On branch main
+nothing to commit, working tree clean
+</pre>
+
+<h2>Verificando o histórico de commits</h2>
+
+<pre>
+C:\html>git log
+commit 1025f97d3565c92cba3d6e0c791cbee2384d6632 (HEAD -> main)
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 21:01:48 2021 -0300
+
+    Incluindo novo paragrafo synthwave
+
+commit 8286a8b9f439092d6e7d0eda75155cde27659439
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 11:42:23 2021 -0300
+
+    index.html original
+</pre>
+
+<h2>Como voltar a situção do commit anterior</h2>
+
+<p>Se desejamos voltar ao estado do diretório de trabalho salvo em um commit específico,
+basta utilizar o comando git checkout.
+</p>
+
+<p>
+Para voltar ao estado do commit 8286a8
+</p>
+
+<pre>
+C:\html>git checkout 8286a
+Note: switching to '8286a'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+    git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+    git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 8286a8b index.html original
+</pre>
+
+<h2>Verificando o status novamente</h2>
+
+<p>
+Note que o GIT mostra que está desanexado do HEAD.  O que isso siginfica?
+</p>
+
+<p>
+Significa que o GIT está posicionado no nosso commit 8286a8b, ou seja, alterações desfeitas.
+</p>
+
+<pre>
+C:\html>git status
+HEAD detached at 8286a8b
+nothing to commit, working tree clean
+</pre>
+
+<h2>Voltando o estado do diretório para o último commit</h2>
+
+<p>
+E se quisermos voltar para o estado do último commit? 
+</p>
+
+<p>
+Note que o comando git log, não mostra mais o commit 1025f, que contem nossa última alteração.
+</p>
+
+<pre>
+C:\html>git log
+commit 8286a8b9f439092d6e7d0eda75155cde27659439 (HEAD)
+Author: Luciano Silagi <luciano.silagi@added.com.br>
+Date:   Wed Nov 3 11:42:23 2021 -0300
+
+    index.html original
+</pre>
+
+<p>
+Calma! O commit 1025f, não foi removido, ele somente não é mostrado.  Mas podemos retornar
+para o último commit:
+</p>
+
+<pre>
+C:\html>git checkout main
+Previous HEAD position was 8286a8b index.html original
+Switched to branch 'main'
+</pre>
+
+<h2>Verificando o histórico de logs novamente:</h2>
+
+<p>
+Note que agora, o git log mostra todos os commits:
+</p>
+
+<pre>
+C:\html>git log
+commit 1025f97d3565c92cba3d6e0c791cbee2384d6632 (HEAD -> main)
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 21:01:48 2021 -0300
+
+    Incluindo novo paragrafo synthwave
+
+commit 8286a8b9f439092d6e7d0eda75155cde27659439
+Author: Luciano Silagi &lt;luciano.silagi@added.com.br&gt;
+Date:   Wed Nov 3 11:42:23 2021 -0300
+
+    index.html original
+</pre>
+</div>
+
+</body>
+</html>
