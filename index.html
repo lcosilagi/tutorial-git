@@ -37,6 +37,11 @@
             padding-left: 15px;
             padding-right: 15px;
             padding-bottom: 10px;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
         }
     </style>
 
@@ -127,6 +132,9 @@ Pasta de C:\html
 
 <h2>Conteúdo do arquivo index.html</h2>
 
+<p>
+Abaixo temos o conteúdo do arquivo index.html:
+</p>
 <pre>
 C:\html>type index.html
 
@@ -148,7 +156,10 @@ C:\html>type index.html
 
 <h2>Verificando se existe um repositório</h2>
 
-<p>Para verificar se existe um repositório GIT no diretório de trabalho:</p>
+<p>
+O comando GIT status mostra o estado atual do diretório de trabalho e no caso abaixo
+informa que não foi encontrado o diretório GIT (Repositório).
+</p>
 
 <pre>
 C:\html>git status
@@ -169,8 +180,8 @@ Initialized empty Git repository in C:/html/.git/
 <h2>Verificando o status antes de adicionar arquivos na área de stage</h2>
 
 <p>
-Na saída gerada pelo comando git status abaixo podemos verficar que apesar do repositório GIT
-ter sido inicializado, ainda temos arquivos não rastreados pelo GIT (Untracked files).
+Apesar de termos inicializado o repositório no diretório de trabalho, o comando git status
+informa que existem arquivos que ainda não estão sendo rastreados (Untracked files).
 </p>
 
 <pre>
@@ -188,7 +199,14 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 <h2>Adicionando arquivos na área de stage</h2>
 
-<p>Podemos utilizar o comando git add para adicionar arquivos ao repositório. Vamos adicionar o arquivo index.html.    
+<p>
+Para o GIT começar a rastrear as modificações nos arquivos, devemos adicionar estes arquivos ou diretorios
+na área de stage.  A área de stage funciona como uma área temporária onde o GIT armazena as alterações dos
+arquivos antes de efetuarmos o commit.
+</p>
+
+<p>
+Vamos adicionar o arquivo index.html na área de stage.
 </p>
 
 <pre>
@@ -199,8 +217,8 @@ git add index.html
 <h2>Verificando o status após adicionar arquivos na área de stage</h2>
 
 <p>
-Na saída gerada pelo comando git status abaixo podemos verificar que o GIT mostra que um existe um novo
-arquivo e nos informa o comando para remover o arquivo da área de stage.
+Com comando git status podemos verificar que o GIT mostra que um existe um novo
+arquivo e também informa o comando para remover o arquivo da área de stage.
 </p>
 
 <pre>
@@ -222,7 +240,7 @@ atuais. Todo commit deve conter uma mensagem descritiva que ajuda a identificar 
 
 <p>
 É através dos commits que podemos rastrear as alterações nos arquivos e inclusive podemos recuperar um
-estado de arquivo através de um commit especifico.
+estado de arquivo através de um commit específico.
 </p>
 
 </p>
@@ -237,8 +255,8 @@ C:\html>git commit -m "index.html original"
 <h2>Verificando o status do diretório de trabalho</h2>
 
 <p>
-O status mostra que o diretório de trabalho está limpo, ou seja, os arquivos armazenados no commits
-são os mesmos que estão no diretório de trabalho.
+O status mostra que o diretório de trabalho está limpo, ou seja, o arquivo armazenado no commit
+é o mesmos que está no diretório de trabalho.
 </p>
 
 <pre>
@@ -250,14 +268,13 @@ nothing to commit, working tree clean
 
 <h2>Verificando o histórico de commits</h2>
 <p>
-O comando git log é responsável por apresentar um histórico com informações sobre todos os commits já
+O comando git log é responsável por mostrar um histórico com informações sobre todos os commits já
 realizados até o momento atual.
 </p>
 
 </p>
-Entre as informações do commit temos, o nome e endereço de e-mail do autor, data em que o commit foi realizado,
-o hash (que é uma string que idenitifica um commit e não se repete) e a mensagem que você utilizou para identificar
-este commit.
+Entre as informações do commit temos o nome e endereço de e-mail do autor, data em que o commit foi realizado,
+o hash SHA1 (que é uma string que idenitifica um commit e não se repete) e a mensagem que você utilizou para identificar este commit.
 </p>
 
 <pre>
@@ -309,7 +326,7 @@ index 0000000..d9ff627
 <h2>Realizando uma modificação no arquivo index.html</h2>
 
 <p>
-Adicionamos um paragrafo no nosso arquivo index.html.    
+Adicionamos um parágrafo no nosso arquivo index.html.    
 </p>
 
 
